@@ -6,6 +6,8 @@ services:
   # more information: https://github.com/0xcaff/docker-simple-firewall
   firewall:
     image: quay.io/0xcaff/simple-firewall:latest
+    build:
+      context: https://github.com/0xcaff/docker-simple-firewall.git
 
     # Needed by the image to setup the firewall.
     cap_add:
@@ -37,6 +39,8 @@ services:
   # information: https://github.com/0xcaff/docker-openvpn-client
   vpn:
     image: quay.io/0xcaff/openvpn-client:latest
+    build:
+      context: https://github.com/0xcaff/docker-openvpn-client.git
 
     # Needed for OpenVPN to work.
     cap_add:
@@ -65,6 +69,8 @@ services:
   # information: https://github.com/0xcaff/docker-rtorrent
   rtorrent:
     image: 0xcaff/rtorrent:latest
+    build:
+      context: https://github.com/0xcaff/docker-rtorrent.git
 
     # Share the network stack of the firewall client container. When this
     # container binds ports, they can be reached through the "firewall" service.
@@ -93,6 +99,8 @@ services:
   # A service containing flood, a web interface for rtorrent.
   flood:
     image: 0xcaff/flood
+    build:
+      context: https://github.com/jfurrow/flood.git
     depends_on:
       - rtorrent
 
