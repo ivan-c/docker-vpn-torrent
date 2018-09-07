@@ -100,7 +100,7 @@ services:
   flood:
     image: 0xcaff/flood
     build:
-      context: https://github.com/jfurrow/flood.git
+      context: https://github.com/jfurrow/flood.git#pull/671/head
     depends_on:
       - rtorrent
 
