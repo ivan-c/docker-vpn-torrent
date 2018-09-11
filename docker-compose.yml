@@ -5,7 +5,6 @@ services:
   # network and the specified destination (ip, port protocol). See its repo for
   # more information: https://github.com/0xcaff/docker-simple-firewall
   firewall:
-    image: quay.io/0xcaff/simple-firewall:latest
     build:
       context: https://github.com/0xcaff/docker-simple-firewall.git
 
@@ -38,7 +37,6 @@ services:
   # A service which creates an openvpn tunnel. Check out its repo for more
   # information: https://github.com/0xcaff/docker-openvpn-client
   vpn:
-    image: quay.io/0xcaff/openvpn-client:latest
     build:
       context: https://github.com/0xcaff/docker-openvpn-client.git
 
@@ -68,9 +66,9 @@ services:
   # A service with the rtorrent torrent client. See the repository for more
   # information: https://github.com/0xcaff/docker-rtorrent
   rtorrent:
-    image: 0xcaff/rtorrent:latest
     build:
-      context: https://github.com/0xcaff/docker-rtorrent.git
+      context: https://github.com/looselyrigorous/docker-rtorrent.git#0.2
+
 
     # Share the network stack of the firewall client container. When this
     # container binds ports, they can be reached through the "firewall" service.
@@ -95,7 +93,6 @@ services:
 
   # A service containing flood, a web interface for rtorrent.
   flood:
-    image: 0xcaff/flood
     build:
       context: https://github.com/jfurrow/flood.git#pull/671/head
     depends_on:
