@@ -96,6 +96,9 @@ services:
     entrypoint: "/bin/sh"
     command: "/wait-for localhost:60000 -- rtorrent"
 
+    # exit 0 on first run (`Copying default configuration`?) unless auto-restart enabled
+    restart: unless-stopped
+
   # A service containing flood, a web interface for rtorrent.
   flood:
     build:
