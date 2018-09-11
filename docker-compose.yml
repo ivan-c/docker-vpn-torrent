@@ -61,11 +61,14 @@ services:
       - ./vpn.ovpn:/vpn/config/config.ovpn
 
     # Start openvpn after the firewall is done.
-    command: "/wait-for localhost:60000 -- openvpn --config /vpn/config/config.ovpn"
+    command: "/wait-for localhost:60000 -- openvpn --config $OVPN_FILE --auth-user-pass $PASSWORD_FILE"
 
   # A service with the rtorrent torrent client. See the repository for more
   # information: https://github.com/0xcaff/docker-rtorrent
   rtorrent:
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
     build:
       context: https://github.com/looselyrigorous/docker-rtorrent.git#0.2
 
@@ -78,8 +81,10 @@ services:
       - "rtorrent-sock:/socket"
 
       # rTorrent persistant state.
-      - downloaded:/rtorrent/downloaded
-      - session:/rtorrent/.rtorrent.session
+      - "./watch:/watch"
+      - "./config:/config"
+      - "./session:/session"
+      - "./download:/download"
 
       # This is the wait-for script from https://github.com/Eficode/wait-for. It
       # is used to ensure that the rtorrent starts only after the firewall is
@@ -105,7 +110,6 @@ services:
       #
       RTORRENT_SOCK: 'true'
     volumes:
-      - flood:/data
       - "rtorrent-sock:/data"
 
     # Expose the flood web interface port.
@@ -118,14 +122,6 @@ services:
       - local
 
 volumes:
-  downloaded:
-    driver: local
-
-  session:
-    driver: local
-
-  flood:
-    driver: local
   rtorrent-sock: {}
 
 networks:
