@@ -38,7 +38,8 @@ services:
   # information: https://github.com/0xcaff/docker-openvpn-client
   vpn:
     build:
-      context: https://github.com/0xcaff/docker-openvpn-client.git
+      context: https://github.com/jessfraz/dockerfiles.git#pull/397/head
+      dockerfile: openvpn/Dockerfile
 
     # Needed for OpenVPN to work.
     cap_add:
