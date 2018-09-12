@@ -62,6 +62,7 @@ services:
       - ./vpn.ovpn:/vpn/config/config.ovpn
 
     # Start openvpn after the firewall is done.
+    entrypoint: "/bin/sh"
     command: "/wait-for localhost:60000 -- openvpn --config $OVPN_FILE --auth-user-pass $PASSWORD_FILE"
 
   # A service with the rtorrent torrent client. See the repository for more
