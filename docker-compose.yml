@@ -6,7 +6,7 @@ services:
   # more information: https://github.com/0xcaff/docker-simple-firewall
   firewall:
     build:
-      context: https://github.com/0xcaff/docker-simple-firewall.git
+      context: https://github.com/0xcaff/docker-simple-firewall.git#pull/1/head
 
     # Needed by the image to setup the firewall.
     cap_add:
