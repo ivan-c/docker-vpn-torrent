@@ -96,7 +96,7 @@ services:
     # Waits for the firewall to be set up before running rtorrent. The VPN may
     # or may not be ready but no traffic will be leaked because of the firewall.
     entrypoint: "/bin/sh"
-    command: "/wait-for localhost:60000 -- rtorrent"
+    command: "/wait-for localhost:60000 -- /init"
 
     # exit 0 on first run (`Copying default configuration`?) unless auto-restart enabled
     restart: unless-stopped
